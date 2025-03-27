@@ -1,0 +1,436 @@
+#text {
+    color: var(--color-normal-contrast-weakest);
+    margin: auto;
+    width: 180px;
+}
+.counter {
+    text-align: center;
+}
+
+.repo-list {
+    padding: 0;
+    color: var(--color-normal-contrast);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    background: var(--color-normal-fill-emphasis);
+}
+
+.repo-list h2 {
+    margin: 0;
+    font-size: var(--size-big-font);
+    color: var(--color-normal-contrast);
+    padding: 20px;
+    background: var(--color-normal-fill-important);
+    border-bottom: 1px solid var(--color-normal-border);
+}
+
+.repos {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+    padding-bottom: 70px;
+}
+
+.repo-item {
+    background: var(--color-normal-fill);
+    border: 1px solid var(--color-normal-border);
+    border-radius: var(--size-normal-radius);
+    padding: 16px;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.repo-item:has(input:checked) {
+    background: var(--color-hover-fill);
+    border-color: var(--color-primary-border);
+}
+
+.repo-item:hover {
+    transform: translateY(-2px);
+    background: var(--color-hover-fill-emphasis);
+    border-color: var(--color-hover-border);
+}
+
+.repo-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.repo-header h3 {
+    margin: 0;
+    font-size: var(--size-normal-font);
+    color: var(--color-primary-contrast);
+    flex: 1;
+}
+
+.repo-status {
+    display: flex;
+    gap: 8px;
+}
+
+.installed-badge {
+    display: inline-block;
+    background: var(--color-success-fill);
+    color: var(--color-success-contrast);
+    padding: 2px 8px;
+    border-radius: var(--size-tiny-radius, 2px);
+    font-size: var(--size-small-font);
+    font-weight: 500;
+}
+
+.update-badge {
+    display: inline-block;
+    background: var(--color-warn-fill);
+    color: var(--color-warn-contrast);
+    padding: 2px 8px;
+    border-radius: var(--size-tiny-radius, 2px);
+    font-size: var(--size-small-font);
+    font-weight: 500;
+}
+
+.repo-description {
+    color: var(--color-normal-contrast-emphasis);
+    margin: 0 0 16px 0;
+    line-height: 1.5;
+    font-size: var(--size-normal-font);
+}
+
+.repo-info {
+    border-top: 1px solid var(--color-normal-border-weaker);
+    padding-top: 12px;
+}
+
+.repo-meta {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 8px;
+    color: var(--color-normal-contrast-emphasis);
+    font-size: var(--size-small-font);
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-normal-contrast-emphasis);
+    font-size: var(--size-small-font);
+}
+
+.repo-dates {
+    display: flex;
+    gap: 16px;
+    font-size: var(--size-small-font);
+    color: var(--color-normal-contrast-emphasis);
+}
+
+.date-item {
+    display: flex;
+    align-items: center;
+}
+
+.repo-actions {
+    margin-top: 16px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+}
+
+.download-action-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: var(--color-primary-fill);
+    color: var(--color-primary-contrast);
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.download-action-button:hover {
+    background: var(--color-primary-fill-emphasis);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.download-action-button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.download-action-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.download-action-button[disabled]:hover {
+    background: var(--color-primary-fill);
+    transform: none;
+    box-shadow: none;
+}
+
+.repo-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: var(--color-normal-fill-emphasis);
+    color: var(--color-normal-contrast);
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 13px;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.repo-link:hover {
+    background: var(--color-normal-fill);
+    color: var(--color-primary-contrast);
+    border-color: var(--color-primary-fill);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.action-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 12px 20px;
+    background: var(--color-normal-fill-important);
+    border-top: 1px solid var(--color-normal-border-emphasis);
+    display: flex;
+    justify-content: center;
+    z-index: 100;
+}
+
+.download-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--color-primary-fill);
+    color: var(--color-primary-contrast);
+    border: none;
+    border-radius: var(--size-normal-radius);
+    cursor: pointer;
+    font-size: var(--size-normal-font);
+}
+
+.download-button:hover {
+    background: var(--color-primary-fill-emphasis);
+}
+
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: var(--color-text-2);
+}
+
+.error-state {
+    text-align: center;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+}
+
+.error-icon {
+    margin-bottom: 16px;
+    background: var(--color-danger-fill);
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-icon-svg {
+    color: var(--color-danger-contrast);
+    font-size: 32px;
+}
+
+.error-message {
+    font-size: var(--size-normal-font);
+    color: var(--color-danger);
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.error-detail {
+    font-size: var(--size-small-font);
+    color: var(--color-normal-contrast-emphasis);
+    margin-bottom: 24px;
+    max-width: 80%;
+    word-break: break-word;
+}
+
+.retry-button {
+    margin-top: 16px;
+    padding: 8px 16px;
+    background: var(--color-danger-fill);
+    color: var(--color-danger-contrast);
+    border: none;
+    border-radius: var(--size-normal-radius);
+    cursor: pointer;
+    font-size: var(--size-normal-font);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.retry-button:hover {
+    background: var(--color-danger-fill-emphasis);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(255, 0, 0, 0.3);
+}
+
+.retry-button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.download-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 8px;
+    background: var(--color-normal-fill-emphasis);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.progress {
+    flex: 1;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--color-primary-fill);
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    position: absolute;
+    right: 8px;
+    top: 4px;
+    font-size: var(--size-small-font);
+    color: var(--color-primary-contrast);
+    background: var(--color-primary-fill);
+    padding: 2px 6px;
+    border-radius: var(--size-normal-radius);
+}
+
+.cancel-button {
+    background: var(--color-danger-fill);
+    border: none;
+    border-radius: var(--size-normal-radius);
+    cursor: pointer;
+    color: var(--color-danger-contrast);
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    min-height: 24px;
+}
+
+.cancel-button:hover {
+    background: var(--color-danger-fill-emphasis);
+}
+
+/* 更新确认对话框样式 */
+.update-confirm-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.update-confirm-dialog {
+    background: var(--color-normal-fill-emphasis);
+    border-radius: var(--size-normal-radius);
+    padding: 24px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.update-confirm-dialog h3 {
+    margin-top: 0;
+    color: var(--color-primary-contrast);
+    font-size: var(--size-normal-font);
+    margin-bottom: 16px;
+}
+
+.update-confirm-dialog p {
+    margin-bottom: 24px;
+    color: var(--color-normal-contrast);
+    line-height: 1.5;
+}
+
+.update-confirm-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.cancel-update-button {
+    padding: 8px 16px;
+    background: var(--color-normal-fill);
+    color: var(--color-normal-contrast);
+    border: 1px solid var(--color-normal-border);
+    border-radius: var(--size-normal-radius);
+    cursor: pointer;
+    font-size: var(--size-normal-font);
+}
+
+.cancel-update-button:hover {
+    background: var(--color-normal-fill-emphasis);
+}
+
+.confirm-update-button {
+    padding: 8px 16px;
+    background: var(--color-primary-fill);
+    color: var(--color-primary-contrast);
+    border: none;
+    border-radius: var(--size-normal-radius);
+    cursor: pointer;
+    font-size: var(--size-normal-font);
+}
+
+.confirm-update-button:hover {
+    background: var(--color-primary-fill-emphasis);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: var(--color-text-3);
+}

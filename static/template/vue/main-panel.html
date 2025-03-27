@@ -1,0 +1,78 @@
+<div class="repo-list">
+    <h2>GitHub Repositories</h2>
+    
+    <!-- Loading State -->
+    <div v-if="loading" class="loading">
+        <ui-loading></ui-loading>
+        Loading repositories...
+    </div>
+    
+    <!-- Error State -->
+    <div v-else-if="error" class="error-state">
+        <div class="error-icon">
+            <ui-icon value="warning" class="error-icon-svg"></ui-icon>
+        </div>
+        <div class="error-message">{{ error.message }}</div>
+        <div class="error-detail" v-if="error.error">{{ error.error }}</div>
+        <button @click="retry" class="retry-button">
+            <ui-icon value="refresh"></ui-icon>
+            重试
+        </button>
+    </div>
+    
+    <!-- Repository List -->
+    <div v-else-if="repos.length > 0" class="repos">
+        <div v-for="repo in repos" :key="repo.name" class="repo-item">
+            <div v-if="repo.downloading" class="download-progress">
+                <ui-progress 
+                    :value="repo.progress" 
+                    class="progress"
+                ></ui-progress>
+                <button class="cancel-button" @click="cancelDownload(repo)">
+                    <ui-icon value="cancel"></ui-icon>
+                </button>
+            </div>
+
+            <div class="repo-header">
+                <h3>{{ repo.name }}</h3>
+                <div class="repo-status">
+                    <span v-if="repo.installed && !repo.has_update" class="installed-badge">已安装</span>
+                    <span v-if="repo.has_update" class="update-badge">可更新</span>
+                </div>
+            </div>
+            <p class="repo-description">{{ repo.description }}</p>
+            <div class="repo-info">
+                <div class="repo-meta">
+                    <span class="meta-item">
+                        <ui-icon value="typescript"></ui-icon>
+                        {{ repo.language }}
+                    </span>
+                    <span class="meta-item">
+                        <ui-icon value="license"></ui-icon>
+                        {{ repo.license }}
+                    </span>
+                </div>
+                <div class="repo-dates">
+                    <span class="date-item">Created: {{ repo.created_at }}</span>
+                    <span class="date-item">Updated: {{ repo.updated_at }}</span>
+                </div>
+            </div>
+            <div class="repo-actions">
+                <button @click="onDownloadClick(repo)" class="download-action-button" :disabled="repo.downloading">
+                    <ui-icon :value="repo.has_update && repo.installed ? 'refresh' : 'download'"></ui-icon>
+                    {{ repo.has_update && repo.installed ? '更新' : (repo.installed && !repo.has_update ? '已安装' : '下载') }}
+                </button>
+                <a :href="repo.url" target="_blank" class="repo-link">
+                    <ui-icon value="link"></ui-icon>
+                    View on GitHub
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Empty State -->
+    <div v-else class="empty-state">
+        <ui-icon value="warning"></ui-icon>
+        <p>No repositories found</p>
+    </div>
+</div>
