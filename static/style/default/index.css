@@ -39,7 +39,7 @@
 .repo-item {
     background: var(--color-normal-fill);
     border: 1px solid var(--color-normal-border);
-    border-radius: var(--size-normal-radius);
+    border-radius: 15px;
     padding: 16px;
     transition: all 0.2s ease;
     position: relative;

@@ -1,5 +1,5 @@
 <div class="repo-list">
-    <h2>GitHub Repositories</h2>
+    <h2>Gmae Framework Repositories</h2>
     
     <!-- Loading State -->
     <div v-if="loading" class="loading">
@@ -59,11 +59,11 @@
             </div>
             <div class="repo-actions">
                 <button @click="onDownloadClick(repo)" class="download-action-button" :disabled="repo.downloading">
-                    <ui-icon :value="repo.has_update && repo.installed ? 'refresh' : 'download'"></ui-icon>
+                    <ui-icon :value="repo.has_update && repo.installed ? 'whirl' : 'arrow-triangle'"></ui-icon>
                     {{ repo.has_update && repo.installed ? '更新' : (repo.installed && !repo.has_update ? '已安装' : '下载') }}
                 </button>
                 <a :href="repo.url" target="_blank" class="repo-link">
-                    <ui-icon value="link"></ui-icon>
+                    <ui-icon value="shrink"></ui-icon>
                     View on GitHub
                 </a>
             </div>
