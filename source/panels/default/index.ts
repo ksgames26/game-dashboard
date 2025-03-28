@@ -102,8 +102,36 @@ module.exports = Editor.Panel.define({
                             // 检查目标目录是否存在
                             const targetDir = path.join(extensionsDir, repo.name);
 
+                            repo.installed = false;
+                            repo.has_update = false;
+
                             // 检查是否已安装
-                            repo.installed = fs.existsSync(targetDir);
+
+                            if (fs.existsSync(targetDir)) {
+                                // 读取目录内容来检查是否为空目录
+                                const dirContents = await fs.readdir(targetDir);
+
+                                // 如果目录是空的，则不认为已安装
+                                if (dirContents.length === 0) {
+                                    console.log(`Repository ${repo.name} directory exists but is empty - not considered installed`);
+                                    continue;
+                                }
+
+                                // 检查目录中是否有package.json文件，这是一个有效安装的标志
+                                const packageJsonPath = path.join(targetDir, 'package.json');
+                                if (!fs.existsSync(packageJsonPath)) {
+                                    console.log(`Repository ${repo.name} directory exists but has no package.json - not considered installed`);
+                                    continue;
+                                }
+
+                                // 现在可以确认这是一个已安装的库
+                                console.log(`Repository ${repo.name} is installed`);
+                                repo.installed = true;
+
+                            } else {
+                                console.log(`Repository ${repo.name} is not installed`);
+                                repo.installed = false;
+                            }
 
                             if (repo.installed) {
                                 console.log(`Repository ${repo.name} is installed`);
