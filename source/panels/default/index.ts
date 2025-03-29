@@ -23,12 +23,7 @@ module.exports = Editor.Panel.define({
         text: '#text',
     },
     methods: {
-        hello() {
-            if (this.$.text) {
-                this.$.text.innerHTML = 'hello';
-                console.log('[cocos-panel-html.default]: hello');
-            }
-        },
+       
     },
     ready() {
         if (this.$.text) {
@@ -267,12 +262,12 @@ module.exports = Editor.Panel.define({
                             console.log(`Downloading ZIP from: ${zipUrl}`);
 
                             // 更新进度到10%
-                            repo.progress = 0.1;
+                            repo.progress = 10;
 
                             // 使用进度更新模拟下载进度
                             const updateProgress = () => {
-                                if (repo.progress < 0.9) {
-                                    repo.progress += 0.05;
+                                if (repo.progress < 95) {
+                                    repo.progress += 5;
                                     repo.progressTimer = setTimeout(updateProgress, 500);
                                 }
                             };
@@ -347,7 +342,7 @@ module.exports = Editor.Panel.define({
                             }
 
                             // 更新进度到90%
-                            repo.progress = 0.9;
+                            repo.progress = 90;
 
                             // 使用外部命令解压 ZIP 文件
                             console.log('Extracting ZIP file:', zipFilePath);
@@ -425,7 +420,7 @@ module.exports = Editor.Panel.define({
                             await fs.remove(zipFilePath);
 
                             // 更新进度到95%
-                            repo.progress = 0.95;
+                            repo.progress = 95;
 
                             // 更新 package.json，添加 last_commit 信息
                             try {
@@ -536,7 +531,7 @@ module.exports = Editor.Panel.define({
                             }
 
                             // 更新进度到100%
-                            repo.progress = 1;
+                            repo.progress = 100;
 
                             console.log(`Successfully downloaded ${repo.name} to ${targetDir}`);
 
