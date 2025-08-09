@@ -14,7 +14,7 @@
         </div>
         <div class="error-message">{{ error.message }}</div>
         <div class="error-detail" v-if="error.error">{{ error.error }}</div>
-        <button @click="retry" class="retry-button">
+        <button type="button" @click="retry" class="retry-button">
             <ui-icon value="refresh"></ui-icon>
             重试
         </button>
@@ -28,7 +28,7 @@
                     :value="repo.progress" 
                     class="progress"
                 ></ui-progress>
-                <button class="cancel-button" @click="cancelDownload(repo)">
+                <button title="Cancel Download"  type="button" class="cancel-button" @click="cancelDownload(repo)">
                     <ui-icon value="cancel"></ui-icon>
                 </button>
             </div>
@@ -52,13 +52,44 @@
                         {{ repo.license }}
                     </span>
                 </div>
+                <div class="repo-dependencies" v-if="repo.dependencies_loading">
+                    <ui-loading class="dependencies-loading-spinner"></ui-loading>
+                    <span>Analyzing dependencies...</span>
+                </div>
+                <div class="repo-dependencies" v-else-if="Object.keys(repo.gameDependencies).length > 0">
+                    <strong class="dependencies-title">Dependencies:</strong>
+                    <ul class="dependencies-list">
+                        <li v-for="(version, name) in repo.gameDependencies" :key="name" class="dependency-item">
+                            {{ name }}: <span>{{ version }}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="repo-version" v-if="!repo.releases_loading">
+                    <strong class="version-title">Version:</strong>
+                    <ui-select v-if="repo.releases.length > 0" 
+                               :value="repo.selectedVersion" 
+                               @change="updateSelectedVersion(repo, $event.target.value)"
+                               class="version-select">
+                        <option value="master">Master Branch</option>
+                        <option v-for="release in repo.releases" 
+                                :key="release.tag_name" 
+                                :value="release.tag_name">
+                            {{ release.name }} {{ release.prerelease ? '(Pre-release)' : '' }}
+                        </option>
+                    </ui-select>
+                    <span v-else class="version-text">Master Branch</span>
+                </div>
+                <div class="repo-version" v-else>
+                    <ui-loading class="version-loading-spinner"></ui-loading>
+                    <span>Loading versions...</span>
+                </div>
                 <div class="repo-dates">
                     <span class="date-item">Created: {{ repo.created_at }}</span>
                     <span class="date-item">Updated: {{ repo.updated_at }}</span>
                 </div>
             </div>
             <div class="repo-actions">
-                <button @click="onDownloadClick(repo)" class="download-action-button" :disabled="repo.downloading">
+                <button type="button" @click="onDownloadClick(repo)" class="download-action-button" :disabled="repo.downloading || repo.dependencies_loading || repo.releases_loading">
                     <ui-icon :value="repo.has_update && repo.installed ? 'whirl' : 'arrow-triangle'"></ui-icon>
                     {{ repo.has_update && repo.installed ? '更新' : (repo.installed && !repo.has_update ? '已安装' : '下载') }}
                 </button>

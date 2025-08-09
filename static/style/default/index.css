@@ -124,11 +124,96 @@
     font-size: var(--size-small-font);
 }
 
+.repo-dependencies {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-normal-border-weaker);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dependencies-loading-spinner {
+    width: 16px;
+    height: 16px;
+}
+
+.dependencies-title {
+    font-size: var(--size-small-font);
+    color: var(--color-normal-contrast-emphasis);
+    display: block;
+    margin-bottom: 8px;
+    flex-shrink: 0;
+}
+
+.dependencies-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.dependency-item {
+    background: var(--color-normal-fill-emphasis);
+    padding: 2px 8px;
+    border-radius: var(--size-tiny-radius);
+    font-size: var(--size-small-font);
+    color: var(--color-normal-contrast);
+}
+
+.dependency-item span {
+    color: var(--color-primary-contrast);
+    font-weight: bold;
+}
+
+.repo-version {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-normal-border-weaker);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.version-title {
+    font-size: var(--size-small-font);
+    color: var(--color-normal-contrast-emphasis);
+    flex-shrink: 0;
+}
+
+.version-select {
+    flex: 1;
+    padding: 4px 8px;
+    border: 1px solid var(--color-normal-border);
+    border-radius: var(--size-tiny-radius);
+    background: var(--color-normal-fill);
+    color: var(--color-normal-contrast);
+    font-size: var(--size-small-font);
+}
+
+.version-select:focus {
+    outline: none;
+    border-color: var(--color-primary-border);
+}
+
+.version-text {
+    color: var(--color-normal-contrast-emphasis);
+    font-size: var(--size-small-font);
+}
+
+.version-loading-spinner {
+    width: 16px;
+    height: 16px;
+}
+
 .repo-dates {
     display: flex;
     gap: 16px;
     font-size: var(--size-small-font);
     color: var(--color-normal-contrast-emphasis);
+    margin-top: 12px;
 }
 
 .date-item {
