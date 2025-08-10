@@ -1,5 +1,6 @@
 // @ts-ignore
 import packageJSON from '../package.json';
+import { createTemplate } from './createTemplete';
 
 /**
  * @en Registration method for the main process of Extension
@@ -9,6 +10,10 @@ export const methods: { [key: string]: (...any: any) => any } = {
     async downloadTools() {
         Editor.Panel.open(packageJSON.name);
     },
+
+    async createTemplate() { 
+        await createTemplate();
+    }
 };
 
 /**

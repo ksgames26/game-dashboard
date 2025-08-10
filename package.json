@@ -43,12 +43,22 @@
                 "path": "i18n:game-dashboard.game_framework",
                 "label": "i18n:game-dashboard.download_tools",
                 "message": "download_tools"
+            },
+            {
+                "path": "i18n:game-dashboard.game_framework",
+                "label": "i18n:game-dashboard.createTemplate",
+                "message": "create_template"
             }
         ],
         "messages": {
             "download_tools": {
                 "methods": [
                     "downloadTools"
+                ]
+            },
+             "create_template": {
+                "methods": [
+                    "createTemplate"
                 ]
             }
         }
